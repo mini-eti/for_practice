@@ -19,21 +19,29 @@ const Book ** same_author(
     const Book * const * books_inlib = db.lib;
     for (size_t i = 0; i < db.books; i++ ){
         const Book * tmp_book = db.lib[i];
-        if (tmp_book->author == name){
+        if (*tmp_book->author == *name){
             out++;
         }
     }
     size_t j = 0;
-    const Book ** answer = new const Book*[out];
-    for (size_t i = 0; i < db.books; i++ ){
-        const Book * tmp_book = db.lib[i];
-        if (tmp_book->author == name){
-            answer[j] = tmp_book;
-            j++;
+    const Book ** answer = nullptr;
+    try{
+        answer = new const Book*[out];
+        for (size_t i = 0; i < db.books; i++ ){
+            const Book * tmp_book = db.lib[i];
+            if (*tmp_book->author == *name){
+                answer[j] = tmp_book;
+                j++;
+            }
         }
+        return answer;
     }
-    return answer;
+    catch(...){
+        throw nullptr;
+        delete[] answer;
+    }
 }
+
 int main(){
     
 }
