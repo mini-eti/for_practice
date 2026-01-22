@@ -10,7 +10,7 @@ struct Lib {
   const size_t * stocks;
 };
 const Book ** same_author(
-  size_t& out, // размер массива-результата
+  size_t& out, // размер массива-рSAAAезультата
   const Lib & db, // библиотека для поиска
   const Book* book // книга-образец (из неё нужен автор)
 ){
@@ -43,5 +43,10 @@ const Book ** same_author(
 }
 
 int main(){
-    
+    int a = 4;
+    int n = 4;
+    int* a1 = &a;
+    int* n1 = &n;
+    bool d = a1 == n1;
+    std :: cout << "pisechki popochki" << '\n';
 }
