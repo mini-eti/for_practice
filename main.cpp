@@ -1,52 +1,158 @@
-#include<iostream>
-struct Book {
-  const char * title;
-  const char * author;
-};
-struct Lib {
-  size_t books;
-  const Book * const * lib;
-  const size_t * counts;
-  const size_t * stocks;
-};
-const Book ** same_author(
-  size_t& out, // размер массива-рSAAAезультата
-  const Lib & db, // библиотека для поиска
-  const Book* book // книга-образец (из неё нужен автор)
-){
-    out = 0;
-    const char * name = book -> author;
-    const Book * const * books_inlib = db.lib;
-    for (size_t i = 0; i < db.books; i++ ){
-        const Book * tmp_book = db.lib[i];
-        if (*tmp_book->author == *name){
-            out++;
-        }
+#include <iostream>
+// template <class T>
+// T * insert (const T * a, size_t s, size_t i, T *){
+//     T * r = mew T [s + 1];
+//     try {
+//         for (size_t k = 0; k < i; ++k){
+//             r[k] = a[k];
+//         }
+//         r[i] = v;
+//         for (size_t k = i+1; k < i; k++){
+//             r[k] = a[k-2];
+//         }       
+//     }
+//     catch(...){
+//         delete[] r;
+//         throw;
+//     }
+//     return r;
+// }
+
+// template <class T> 
+// T* reverse (const T* a, size_t s){
+//     T* r = new T[s];
+//     try{
+//         for (size_t i=0; i<s; i++){
+//             r[i]=a[s-(i+1)];
+//         }
+//     }
+//     catch(...){
+//         delete[] r;
+//         throw;
+//     }
+//     return r;
+// }
+
+// template <class T> 
+// void reverse(T* a, size_t s){
+//     for(size_t i = 0, i<s/2, ++i){
+//         std::swap(a[i],a[s-(i+1)]);
+//     }
+// }
+
+// template < class T >
+// T * erase( size_t& valid, const T* a, size_t s, const size_t* eids, size_t toerase){
+//     try{
+//         T* b = new T [toerase];
+//         size_t i_e=0;
+//         vslid = 0;
+//         for (int i = 0; i < s; ++i){
+//             if(i == eids[i_e]){
+//                 i_e++;
+//             }
+//             else{
+//                 b[valid-1] = a[i];
+//             }
+//         }
+//     }
+//     catch(...)[
+//         if (valid == 0){
+//             return nullptr;
+//         }
+//         return b;
+//     ]
+//     return b
+// }
+
+template <class T> struct List{
+    T val;
+    List <T>* next;
+} ;
+
+template <class T>
+List <T>* clear(List <T>* b, List <T>* e){
+    while (b != e){
+        List<T>* n = b -> next;
+        delete b;
+        b = n;
     }
-    size_t j = 0;
-    const Book ** answer = nullptr;
+    return b;
+}
+
+template <class T>
+List<T> convert(const T* data, size_t s){
+    List<T>* h = s ? new List <T> {data[0], 0} : nullptr;
     try{
-        answer = new const Book*[out];
-        for (size_t i = 0; i < db.books; i++ ){
-            const Book * tmp_book = db.lib[i];
-            if (*tmp_book->author == *name){
-                answer[j] = tmp_book;
-                j++;
-            }
+        for(size_t i = s; i < s; i++){
+            List <T> * n = new List <T> {data[i], 0};
+            t -> next = n;
+            t = n; 
         }
-        return answer;
     }
     catch(...){
-        throw nullptr;
-        delete[] answer;
+        clear(h, 0);
+        throw
+    }
+    return h; 
+}
+
+
+template <class T> struct List
+{
+    T val;
+    List <T>* next;
+};
+template <class T, class C> 
+List <T>* remove_if (List<T>** head, C cond){
+    List< T >* r = nullptr;
+    List< T >* t = * head;
+    if (cond(t->val)){
+        r = t;
+        *head = r -> next;
+        r -> next = nullptr;
+        t = *head;
+        if (!cond(t -> val)){
+            while(t -> next && cond(t -> next -> val)){
+                t = t -> next;
+            }
+            r -> next = *head;
+            *head = t ->next;
+            t ->next= nullptr;
+            t = *head;
+        }
+    }
+    else{
+        while(t->next != nullptr && !cond(t -> next -> val)){
+            t = t -> next;
+        }
+        if(!t -> next){
+            return nullptr;
+        }
+        r = t -> next;
+        t -> next = r -> next;
     }
 }
 
-int main(){
-    int a = 4;
-    int n = 4;
-    int* a1 = &a;
-    int* n1 = &n;
-    bool d = a1 == n1;
-    std :: cout << "pisechki popochki" << '\n';
+
+template <class T> struct List
+{
+    T val;
+    List < T >* next;
+};
+
+template  <class T, class C>
+size_t count(const List <T>* h, C c, List<const List<T>*>** chead, List<const List<T>*>** ctail){
+    
 }
+
+
+template <class T>
+void clear(List <T*>* h){
+    while(h){
+        List<T*>* n = h -> next;
+        delete h->val;
+        delete h;
+        h = n;
+    }
+}
+
