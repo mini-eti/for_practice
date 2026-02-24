@@ -156,3 +156,23 @@ void clear(List <T*>* h){
     }
 }
 
+template< class T >
+size_t Size(const List< const List< T >* >* h){
+    size_t conut = 0;
+    while (h)
+    {
+        count += size_t<T>(h->val);
+        h = h ->next;
+    }
+    return count;
+}
+
+template< class T >
+size_t clear(const List< const List< T >* >* h){
+    while(h){
+        clear<T>(h->val);
+        List<List <T>*>*n = h -> next;
+        delete h; 
+        h = n;
+    }
+}
