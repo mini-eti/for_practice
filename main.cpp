@@ -176,3 +176,25 @@ size_t clear(const List< const List< T >* >* h){
         h = n;
     }
 }
+
+
+template < class T > struct Vec{
+    T* data; size_t size;
+};
+
+template < class T >
+size_t size (Vec < const List< T >* > v){
+    size_t count = 0;
+    for(size_t i = 0; i <v.size;i++){
+        count+=size<T>(v.data[i]);
+    }
+    return count;
+}
+
+template < class T >
+size_t clear (Vec < const List< T >* > v){
+    for(size_t i =0; i < v.size; i++){
+        clear <T>(v.data[i]);
+    }
+    delete[] v.data;
+}
