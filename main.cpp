@@ -198,3 +198,29 @@ size_t clear (Vec < const List< T >* > v){
     }
     delete[] v.data;
 }
+
+template < class T >
+size_t size( Vec < T >* v){
+    size_t count = 0;
+    for (size_t i =0; i < v->size; i++){
+        count += v[i]->data;
+    }
+    return count;
+}
+
+template < class T >
+size_t size(const List< Vec < T >* >* h){
+    size_t count = 0;
+    while (h)
+    {
+        count += size<T>(h->val);
+        h = h ->next;
+    }
+    return count;
+}
+
+
+template < class T >
+void clear( Vec < T >* v){
+    
+}
